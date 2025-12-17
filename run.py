@@ -1,23 +1,42 @@
 from core.matrix import Matrix
+import time
+
+
+def section(title):
+    print("\n" + "=" * 50)
+    print(title)
+    print("=" * 50)
 
 
 def main():
-    print("=== Matrix Engine ===")
+    section("MATRIX ENGINE — DEMO")
+
+    time.sleep(0.3)
 
     A = Matrix([[1, 2], [3, 4]])
     B = Matrix([[5, 6], [7, 8]])
 
-    print("\nA:")
+    section("Matrix A")
     print(A)
 
-    print("\nB:")
+    time.sleep(0.3)
+
+    section("Matrix B")
     print(B)
 
-    print("\nA * B:")
-    print(A * B)
+    time.sleep(0.3)
 
-    print("\ndet(A):", A.det())
-    print("rank(A):", A.rank())
+    section("Matrix Multiplication: A × B")
+    C = A * B
+    print(C)
+
+    time.sleep(0.3)
+
+    section("Matrix Properties")
+    print(f"det(A)  = {A.det()}")
+    print(f"rank(A) = {A.rank()}")
+
+    print("\nDemo finished successfully.")
 
 
 if __name__ == "__main__":
