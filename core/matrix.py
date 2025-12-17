@@ -19,13 +19,27 @@ class Matrix:
     def copy(self):
         return Matrix([row[:] for row in self.data])
 
-    def __repr__(self):
-        col_widths = [max(len(str(self.data[i][j])) for i in range(self.rows)) for j in range(self.cols)]
+    def __str__(self):
+        col_widths = [
+            max(len(f"{self.data[i][j]:.3f}") for i in range(self.rows))
+            for j in range(self.cols)
+        ]
+
         lines = []
         for row in self.data:
-            line = " ".join(str(val).rjust(col_widths[j]) for j, val in enumerate(row))
-            lines.append(line)
+            formatted = [
+                (
+                    f"{val:>{col_widths[j]}.3f}"
+                    if isinstance(val, (int, float))
+                    else str(val)
+                )
+                for j, val in enumerate(row)
+            ]
+            lines.append("| " + "  ".join(formatted) + " |")
+
         return "\n".join(lines)
+
+    __repr__ = __str__
 
     # ---------- Basic operations ----------
 
@@ -77,10 +91,7 @@ class Matrix:
     # ---------- Transpose ----------
 
     def transpose(self):
-        result = [
-            [self.data[j][i] for j in range(self.rows)]
-            for i in range(self.cols)
-        ]
+        result = [[self.data[j][i] for j in range(self.rows)] for i in range(self.cols)]
         return Matrix(result)
 
     # ---------- Determinant ----------
@@ -98,11 +109,7 @@ class Matrix:
             a, b, c = self.data[0]
             d, e, f = self.data[1]
             g, h, i = self.data[2]
-            return (
-                a*(e*i - f*h)
-                - b*(d*i - f*g)
-                + c*(d*h - e*g)
-            )
+            return a * (e * i - f * h) - b * (d * i - f * g) + c * (d * h - e * g)
 
         total = 0
         for col in range(self.cols):
@@ -113,11 +120,7 @@ class Matrix:
 
     def _minor(self, row_to_remove, col_to_remove):
         data = [
-            [
-                self.data[r][c]
-                for c in range(self.cols)
-                if c != col_to_remove
-            ]
+            [self.data[r][c] for c in range(self.cols) if c != col_to_remove]
             for r in range(self.rows)
             if r != row_to_remove
         ]
@@ -136,10 +139,7 @@ class Matrix:
         if self.rows == 2:
             a, b = self.data[0][0], self.data[0][1]
             c, d = self.data[1][0], self.data[1][1]
-            inv_data = [
-                [ d, -b],
-                [-c,  a]
-            ]
+            inv_data = [[d, -b], [-c, a]]
             return (1 / detA) * Matrix(inv_data)
 
         cofactors = []
