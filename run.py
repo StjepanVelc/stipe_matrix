@@ -1,5 +1,15 @@
-from core.matrix import Matrix
+import sys
+import os
 import time
+
+if getattr(sys, "frozen", False):
+    BASE_DIR = sys._MEIPASS
+else:
+    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+sys.path.insert(0, BASE_DIR)
+
+from core.matrix import Matrix
 
 
 def section(title):
@@ -27,8 +37,7 @@ def main():
     time.sleep(0.3)
 
     section("Matrix Multiplication: A × B")
-    C = A * B
-    print(C)
+    print(A * B)
 
     time.sleep(0.3)
 
@@ -37,8 +46,8 @@ def main():
     print(f"rank(A) = {A.rank()}")
 
     print("\nDemo finished successfully.")
+    time.sleep(3)
 
 
 if __name__ == "__main__":
     main()
-    input("\nPritisni Enter za izlaz...")
