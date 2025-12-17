@@ -1,5 +1,5 @@
-from .priv_matr import Matrix
-from .utils import (
+from .core.matrix import Matrix
+from .utils.matrix_utils import (
     random_matrix,
     random_float_matrix,
     random_vector,

@@ -1,5 +1,5 @@
 import random
-from priv_matr import Matrix
+from core.matrix import Matrix
 
 
 # ---------------------------------------------------------

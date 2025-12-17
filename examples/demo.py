@@ -1,5 +1,5 @@
-from priv_matr import Matrix
-import utils
+from core.matrix import Matrix
+import utils.matrix_utils as matrix_utils
 
 
 print("====================================")
@@ -54,15 +54,15 @@ print("\n====================================")
 print("  RANDOM MATRICES")
 print("====================================")
 
-R = utils.random_matrix(3, 3, 0, 9)
+R = matrix_utils.random_matrix(3, 3, 0, 9)
 print("\nRandom integer matrix R:")
 print(R)
 
-Rf = utils.random_float_matrix(3, 3)
+Rf = matrix_utils.random_float_matrix(3, 3)
 print("\nRandom float matrix (0-1):")
 print(Rf)
 
-v = utils.random_vector(4)
+v = matrix_utils.random_vector(4)
 print("\nRandom vector:")
 print(v)
 
@@ -71,11 +71,11 @@ print("\n====================================")
 print("  SPECIAL MATRICES")
 print("====================================")
 
-D = utils.diagonal_matrix([2, 5, 7])
+D = matrix_utils.diagonal_matrix([2, 5, 7])
 print("\nDiagonal matrix:")
 print(D)
 
-S = utils.scalar_matrix(3, 4)
+S = matrix_utils.scalar_matrix(3, 4)
 print("\nScalar (4I) matrix:")
 print(S)
 
@@ -84,19 +84,19 @@ print("\n====================================")
 print("  CHECKS")
 print("====================================")
 
-print("\nIs A square?", utils.is_square(A))
-print("Is zero matrix?", utils.is_zero_matrix(Matrix.zeros(2, 2)))
-print("Is identity?", utils.is_identity(Matrix.identity(3)))
+print("\nIs A square?", matrix_utils.is_square(A))
+print("Is zero matrix?", matrix_utils.is_zero_matrix(Matrix.zeros(2, 2)))
+print("Is identity?", matrix_utils.is_identity(Matrix.identity(3)))
 
 
 print("\n====================================")
 print("  FILE SAVE/LOAD")
 print("====================================")
 
-utils.save_to_file(A, "A_matrix.txt")
+matrix_utils.save_to_file(A, "A_matrix.txt")
 print("\nMatrix A saved to A_matrix.txt")
 
-A_loaded = utils.load_from_file("A_matrix.txt")
+A_loaded = matrix_utils.load_from_file("A_matrix.txt")
 print("\nLoaded matrix A:")
 print(A_loaded)
 
@@ -107,11 +107,11 @@ print("====================================")
 
 lst = [[9, 8], [7, 6]]
 print("\nList → Matrix:")
-print(utils.list_to_matrix(lst))
+print(matrix_utils.list_to_matrix(lst))
 
 print("\nVector → List:")
 vec = Matrix([[1], [2], [3]])
-print(utils.vector_to_list(vec))
+print(matrix_utils.vector_to_list(vec))
 
 
 print("\n====================================")
@@ -120,10 +120,10 @@ print("====================================")
 
 A2 = Matrix([[1, 1], [1, 1]])
 print("\nHorizontal stack (A | A2):")
-print(utils.hstack(A, A2))
+print(matrix_utils.hstack(A, A2))
 
 print("\nVertical stack:")
-print(utils.vstack(A, A2))
+print(matrix_utils.vstack(A, A2))
 
 
 print("\n====================================")
